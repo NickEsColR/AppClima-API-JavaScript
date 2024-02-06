@@ -60,6 +60,18 @@ To run the project locally, follow these steps:
 
 5. Open your preferred web browser and navigate to `http://localhost:3000` to view the application.
 
+## Data Source
+
+The countries and cities database utilized in this project is sourced from [ToniCifre/all-countries-and-cities-json](https://github.com/ToniCifre/all-countries-and-cities-json). This database provides comprehensive information about countries and cities around the world and is made available under the MIT License.
+
+For detailed information about the data structure and usage, please refer to the [repository](https://github.com/ToniCifre/all-countries-and-cities-json) and its accompanying documentation.
+
 ## Acknowledgments
 
-I extend my gratitude to garu2 for the original Weather Searcher project.
+* I extend my gratitude to garu2 for the original Weather Searcher project.
+
+* I extend my gratitude to Tonicifre and Egor Usoltcev which provide the country database used to improve the project usage
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/NickEsColR/AppClima-API-JavaScript/blob/main/LICENSE) file for details
