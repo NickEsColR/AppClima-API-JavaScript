@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { callAPI, kelvinToCentigrade } from "../helpers/custom";
+import { callAPI, getCities } from "../helpers/custom";
 
-export const WeatherCard = ({index, removeCard}) => {
+export const WeatherCard = ({ index, removeCard, countries }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [hasCountry, setHasCountry] = useState(false);
+  const [ cities, setCities ] = useState([]);
 
   const getWeatherData = (e) => {
     e.preventDefault();
     const country = e.target.country.value;
     const city = e.target.city.value;
-    console.log(country === "" || city === "");
     if (city === "" || country === "") {
       setErrorMessage("Ambos campos son obligatorios");
     } else {
@@ -23,19 +24,26 @@ export const WeatherCard = ({index, removeCard}) => {
             weather: [arr],
           } = dataJSON;
 
-          const degrees = kelvinToCentigrade(temp);
-          const min = kelvinToCentigrade(temp_min);
-          const max = kelvinToCentigrade(temp_max);
-
-          setWeatherData({ country, city, arr, degrees, min, max });
+          setWeatherData({ country, city, arr, temp, temp_min, temp_max });
         }
       });
     }
   };
-  const clickME = () => {console.log(index) ; removeCard(index)};
+
+  const handleDelete = (e) => {
+    removeCard(index);
+  };
+
+  const selectCountry = (e) => {
+    setHasCountry(true);
+    setCities(getCities(e.target.value));
+  };
+
   return (
     <div className="weather-content">
-      <span className="delete-btn" onClick={clickME}>x</span>
+      <span className="delete-btn" onClick={handleDelete}>
+        x
+      </span>
       {weatherData === null ? (
         <p>Agrege pais y cuidad</p>
       ) : (
@@ -45,36 +53,52 @@ export const WeatherCard = ({index, removeCard}) => {
             src={`https://openweathermap.org/img/wn/${weatherData.arr.icon}@2x.png`}
             alt="weather icon"
           />
-          <h2>{weatherData.degrees}°C</h2>
-          <p>Min: {weatherData.min}°C</p>
-          <p>Max: {weatherData.max}°C</p>
+          <h2>{weatherData.temp}°C</h2>
+          <p>Min: {weatherData.temp_min}°C</p>
+          <p>Max: {weatherData.temp_max}°C</p>
         </div>
       )}
       <form onSubmit={(e) => getWeatherData(e)} className="get-weather">
-        <select name="country" id="country" defaultValue="">
+        <select
+          name="country"
+          id="country"
+          defaultValue=""
+          onChange={selectCountry}
+        >
+          (
           <option disabled value="">
             Select the country
           </option>
-          <option value="AR">Argentina</option>
-          <option value="CO">Colombia</option>
-          <option value="CR">Costa Rica</option>
-          <option value="ES">España</option>
-          <option value="US">Estados Unidos</option>
-          <option value="MX">México</option>
-          <option value="PE">Perú</option>
+          )
+          {countries.map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
         </select>
         <select name="city" id="city" defaultValue="">
-          <option disabled value="">
-            Select the city
-          </option>
-          <option value="Bogotá">Bogotá</option>
-          <option value="Medellín">Medellín</option>
-          <option value="Cartagena">Cartagena</option>
-          <option value="Cali">Cali</option>
+          {hasCountry ? (
+            <option disabled value="">
+              Select the city
+            </option>
+          ) : (
+            <option disabled value="">
+              Select the country first
+            </option>
+          )}
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
         </select>
         <input type="submit" value="Get Weather" />
       </form>
-      {errorMessage === "" ? "" : <p className="alert-message">{errorMessage}</p>}
+      {errorMessage === "" ? (
+        ""
+      ) : (
+        <p className="alert-message">{errorMessage}</p>
+      )}
     </div>
   );
 };

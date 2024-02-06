@@ -2,9 +2,12 @@ import React, { useState, useRef } from 'react'
 import { AddCard } from "./AddCard";
 import { WeatherCard } from "./WeatherCard";
 
+
 export const MainComponent = () => {
   const [weatherCards, setWeatherCards] = useState([]);
   const currentKeyCard = useRef(0);
+  
+  const countries = require("../data/countries.json");
 
   const addCard = () => {
     setWeatherCards([...weatherCards, currentKeyCard.current++]);
@@ -26,6 +29,7 @@ export const MainComponent = () => {
                 key={key}
                 index={index}
                 removeCard={removeCard}
+                countries={countries}
               />
             )
           })}
