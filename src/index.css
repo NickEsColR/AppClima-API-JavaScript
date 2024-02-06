@@ -76,6 +76,7 @@ main {
 
 .weather-content p {
     color: #cfcfd9;
+    margin-bottom: 20px;
 }
 
 .result {
@@ -132,6 +133,9 @@ form input[type="submit"] {
     color: #fff;
     font-weight: 600;
     transition: width 1s;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 form input[type="submit"]:hover {
@@ -150,6 +154,7 @@ form input[type="submit"]:hover {
     position: absolute;
     right: 7px;
     top: 2px;
+    color:rgb(150, 28, 28);
 }
 
 /* Weather add */
