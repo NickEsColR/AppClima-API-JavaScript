@@ -1,4 +1,4 @@
-import { WeatherCard } from "./components/WeatherCard";
+import { MainComponent } from "./components/MainComponent";
 
 function App() {
   return (
@@ -6,14 +6,7 @@ function App() {
       <header>
         <h1>Buscador del clima</h1>
       </header>
-      <main>
-        <section className="weather-container">
-          <WeatherCard/>
-          <div className="weather-add">
-            <p>+</p>
-          </div>
-        </section>
-      </main>
+      <MainComponent/>
       <footer>
         <p>
           Developed by <a href="https://github.com/NickEsColR">NickEsColR</a>

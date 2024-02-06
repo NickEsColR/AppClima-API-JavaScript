@@ -9,6 +9,7 @@ export const WeatherCard = () => {
     e.preventDefault();
     const country = e.target.country.value;
     const city = e.target.city.value;
+    console.log(country === "" || city === "");
     if (city === "" || country === "") {
       setErrorMessage("Ambos campos son obligatorios");
     } else {
@@ -73,7 +74,7 @@ export const WeatherCard = () => {
         </select>
         <input type="submit" value="Get Weather" />
       </form>
-      {errorMessage ? "" : <p className="alert-message">{errorMessage}</p>}
+      {errorMessage === "" ? "" : <p className="alert-message">{errorMessage}</p>}
     </div>
   );
 };
