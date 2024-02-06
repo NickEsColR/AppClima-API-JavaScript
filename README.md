@@ -22,6 +22,14 @@ I have made several enhancements to the original project, including:
 
 Feel free to explore and utilize these modifications to enhance your weather searching experience.
 
+### React usage
+
+Another enhancement is the React library to make components reactive. Some of the hooks used are
+
+* **useState** to allow re-rendering of components.
+
+* **useRef** to allow the re-rendering of wetherCard component
+
 ## Getting Started
 
 To run the project locally, follow these steps:
@@ -38,7 +46,19 @@ To run the project locally, follow these steps:
     cd AppClima-API-JavaScript
     ```
 
-3. Open the `index.html` file in your preferred web browser or set up a local server for a more dynamic experience.
+3. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+4. Start the development server:
+
+    ```bash
+    npm start
+    ```
+
+5. Open your preferred web browser and navigate to `http://localhost:3000` to view the application.
 
 ## Acknowledgments
 
