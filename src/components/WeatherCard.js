@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { callAPI, kelvinToCentigrade } from "../helpers/custom";
 
-export const WeatherCard = () => {
+export const WeatherCard = ({index, removeCard}) => {
   const [weatherData, setWeatherData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -32,10 +32,10 @@ export const WeatherCard = () => {
       });
     }
   };
-
+  const clickME = () => {console.log(index) ; removeCard(index)};
   return (
     <div className="weather-content">
-      <span className="delete-btn" >x</span>
+      <span className="delete-btn" onClick={clickME}>x</span>
       {weatherData === null ? (
         <p>Agrege pais y cuidad</p>
       ) : (

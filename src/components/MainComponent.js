@@ -1,24 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { AddCard } from "./AddCard";
 import { WeatherCard } from "./WeatherCard";
 
 export const MainComponent = () => {
-  const [WeatherCards, setWeatherCards] = useState([<WeatherCard key={0} />]);
+  const [weatherCards, setWeatherCards] = useState([]);
+  const currentKeyCard = useRef(0);
 
   const addCard = () => {
-    setWeatherCards([...WeatherCards, <WeatherCard key={WeatherCards.length}/>]);
+    setWeatherCards([...weatherCards, currentKeyCard.current++]);
   }
-
-
-
+  
+  const removeCard = (index) => {
+    console.log('removecard',index);
+    const newCards = weatherCards.filter((card, i) => i !== index);
+    console.log(newCards.length)
+    setWeatherCards(newCards);
+  }
+  
   return (
     <main>
         <section className="weather-container">
-          {WeatherCards.map((card, index) => {
+          {weatherCards.map((key, index) => {
             return (
-              <div key={index}>
-                {card}
-              </div>
+              <WeatherCard
+                key={key}
+                index={index}
+                removeCard={removeCard}
+              />
             )
           })}
           <AddCard addCard={addCard}/>
