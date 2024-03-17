@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { callAPI, getCities } from "../helpers/custom";
+import { getCities } from "../helpers/custom";
+import { callAPI } from "../helpers/custom";
 
+/**
+ * Component that renders a card with the weather information
+ * @param {int} index - Index of the card
+ * @param {function} removeCard - Function to remove the card
+ * @param {Array} countries - Array of countries
+ * @returns {JSX.Element}
+ */
 export const WeatherCard = ({ index, removeCard, countries }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasCountry, setHasCountry] = useState(false);
-  const [ cities, setCities ] = useState([]);
+  const [cities, setCities] = useState([]);
 
+  /**
+   * Function that calls the API to get the weather information
+   * @param {*} e - Event
+   */
   const getWeatherData = (e) => {
     e.preventDefault();
     const country = e.target.country.value;
@@ -30,10 +42,18 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
     }
   };
 
+  /**
+   * Function that removes the card
+   * @param {*} e - Event
+   */
   const handleDelete = (e) => {
     removeCard(index);
   };
 
+  /**
+   * Function that sets the cities for the selected country
+   * @param {*} e - Event
+   */
   const selectCountry = (e) => {
     setHasCountry(true);
     setCities(getCities(e.target.value));
