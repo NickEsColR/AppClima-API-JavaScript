@@ -21,8 +21,8 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
    */
   const getWeatherData = (e) => {
     e.preventDefault();
-    const country = e.target.country.value;
-    const city = e.target.city.value;
+    const country = e.target.elements.country.value;
+    const city = e.target.elements.city.value;
     if (city === "" || country === "") {
       setErrorMessage("Ambos campos son obligatorios");
     } else {
@@ -32,7 +32,7 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
           setErrorMessage("Ciudad no encontrada");
         } else {
           const {
-            main: { temp, temp_min, temp_max },
+            main: { temp, temp_min, temp_max }, name: city, sys: { country },
             weather: [arr],
           } = dataJSON;
 
@@ -87,7 +87,7 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
         >
           (
           <option disabled value="">
-            Select the country
+            Selecciona el pais
           </option>
           )
           {countries.map((country) => (
@@ -99,11 +99,11 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
         <select name="city" id="city" defaultValue="">
           {hasCountry ? (
             <option disabled value="">
-              Select the city
+              Selecciona la ciudad
             </option>
           ) : (
             <option disabled value="">
-              Select the country first
+              Selecciona el pais primero
             </option>
           )}
           {cities.map((city) => (
@@ -112,7 +112,7 @@ export const WeatherCard = ({ index, removeCard, countries }) => {
             </option>
           ))}
         </select>
-        <input type="submit" value="Get Weather" />
+        <input type="submit" value="Buscar" />
       </form>
       {errorMessage === "" ? (
         ""

@@ -42,10 +42,11 @@ main {
 /* Weather container */
 .weather-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fit, 300px);
     gap: 60px 80px;
     justify-content: center;
     padding: 0 50px;
+    margin:0 auto;
 }
 
 /* Weather content */
